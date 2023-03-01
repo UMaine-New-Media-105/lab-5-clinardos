@@ -1,0 +1,92 @@
+// Linardos, Caitlin
+// Lab 5, Example 2
+
+// This is where I defined my variables
+let x1;
+let speedX;
+let y;
+let speedY;
+
+function setup() {
+  createCanvas(400, 400);
+
+  // Where I initialized my variables
+  x1 = 2;
+  speedX = random(1, 4);
+  y1 = 2;
+  speedY = random(1, 4);
+}
+
+function draw() {
+  background(220);
+
+  // Setting up the speed of sprite
+  x1 = x1 + speedX;
+  y1 = y1 + speedY;
+
+  // adding sprite
+  addCreepySmileyFace(x1, y1, 1);
+
+  // This controls
+  if (x1 >= 300 || x1 <= 0) {
+    speedX = speedX * -1;
+  }
+  if (y1 >= 300 || y1 <= 0) {
+    speedY = speedY * -1;
+  }
+
+  // This is using the console, it is commented out do to using it makes the sketch lag.
+
+  // console.log ("The value of X" + x1);
+  // console.log ("The value of Y" + y1);
+  // console.log ("The value of speedY" + speedY)
+  // console.log ("The value of speedX" + speedX)
+}
+
+// This is my sprite from a previous lab
+function addCreepySmileyFace(x, y, size) {
+  translate(x, y);
+  scale(size);
+
+  // These are the if-else statements responsible for the color changes
+  if (mouseX < 50) {
+    fill("#DA00FF");
+  } else if (mouseX >= 50 && mouseX < 150) {
+    fill("rgb(120,255,120)");
+  } else if (mouseX >= 150 && mouseX < 300) {
+    fill("rgb(88,192,255)");
+  } else {
+    fill("pink");
+  }
+
+  // This is the code used to create the actual smiley face
+
+  ellipse(55, 55, 100);
+
+  fill("black");
+  ellipse(70, 40, 13, 40);
+  ellipse(40, 40, 13, 40);
+
+  // push () pop() is used to allow only this section of code to have a strokeWeight of 5
+  push();
+  noFill();
+  strokeWeight(5);
+  arc(57, 57, 80, 80, 0, 16);
+  pop();
+}
+
+// This allows the sprite to move with key press.
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+    speedX = speedX * -1;
+  }
+  if (keyCode === RIGHT_ARROW) {
+    speedX = speedX * -1;
+  }
+  if (keyCode === DOWN_ARROW) {
+    speedY = speedY * -1;
+  }
+  if (keyCode === UP_ARROW) {
+    speedY = speedY * -1;
+  }
+}
